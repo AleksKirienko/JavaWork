@@ -1,5 +1,6 @@
 gradle/
-gradle/
 .idea/
 build/
 gradlew*
+.DS_Store
+.gradle/
