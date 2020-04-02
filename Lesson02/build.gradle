@@ -1,0 +1,8 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+group 'ru.sibsutis'
+
+application {
+    mainClassName = "ru.sibsutis.Lesson02"
+}
