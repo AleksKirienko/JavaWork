@@ -1,1 +1,4 @@
-Hello
+Directory = false 
+RegFile = true
+Hidden = false
+2020-04-05T20:32:01.973481Z
