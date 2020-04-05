@@ -1,0 +1,41 @@
+package ru.sibsutis;
+
+import java.io.File;
+import java.io.IOException;
+
+public class WatcherService {
+    public static void main(String[] args) throws IOException, InterruptedException {
+        File tmp = new File("example.txt");
+        boolean isCreate = tmp.createNewFile();
+        //System.out.println(isCreate);
+
+        System.out.println(tmp.exists()); //доступность файла/директории
+        Thread.sleep(1000);
+
+        boolean isDel = tmp.delete();
+        //System.out.println(isDel);
+
+        System.out.println(tmp.exists());
+
+
+        File tmpDir = new File("tmp_dir");
+        tmpDir.mkdir();
+        System.out.println(tmpDir.getAbsolutePath());//путь до созданной дир.
+
+        System.out.println(tmpDir.lastModified()); //время последней модификации UNIXTIME
+
+        //Имена всех папок в текущ дир
+        /*for (String fileName : (new File(".")).list()) {
+            System.out.println(fileName);
+        }
+        System.out.println();
+        for (File fileName : (new File(".")).listFiles()) {
+            System.out.println(fileName.length());//размер файлов
+        }*/
+        for (File fileName : (new File(".")).listFiles()) {
+            //isHidden - проверка на скрытость файла
+            System.out.println(fileName.getName() + " " + fileName.length() + " " + fileName.isDirectory() + " " + fileName.isHidden());
+        }
+
+    }
+}
