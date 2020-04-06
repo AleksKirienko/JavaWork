@@ -1,3 +1,1 @@
-$gradle build
-
-$gradle run
+![Image alt](https://github.com/AleksKirienko/JavaWork/blob/master/1.gif)
