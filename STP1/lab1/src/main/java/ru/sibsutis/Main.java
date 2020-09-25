@@ -6,46 +6,24 @@ import java.io.InputStreamReader;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        try {
-            int a, b;
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            String delimeter = "/"; // Разделитель
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             System.out.println("First fraction: ");
             String str = br.readLine();
-            String[] subStr = str.split(delimeter);
-            a = Integer.parseInt(subStr[0]);
-            b = Integer.parseInt(subStr[1]);
-            System.out.println("a = " + a);
-            System.out.println("b = " + b);
-            Fraction fr1 = new Fraction(a, b);
+
+            Fraction fr1 = new TFract(str);
 
             System.out.println("Second fraction: ");
             str = br.readLine();
-            subStr = str.split(delimeter);
-            a = Integer.parseInt(subStr[0]);
-            b = Integer.parseInt(subStr[1]);
-            System.out.println("a = " + a);
-            System.out.println("b = " + b);
-            br.close();
-//            System.out.println(new String(str).toLowerCase());
-            Fraction fr2 = new Fraction(a, b);
 
-            System.out.print("\nSum = ");
-            fr1.sum(fr2).print();
-            System.out.println();
+            Fraction fr2 = new TFract(str);
 
-            System.out.print("Sub = ");
-            fr1.sub(fr2).print();
-            System.out.println();
+            System.out.println("\nSum = " + fr1.sum(fr2).getStr());
 
-            System.out.print("Mul = ");
-            fr1.mul(fr2).print();
-            System.out.println();
+            System.out.println("Sub = " + fr1.sub(fr2).getStr());
 
-            System.out.print("Div = ");
-            fr1.div(fr2).print();
-            System.out.println();
+            System.out.println("Mul = " + fr1.mul(fr2).getStr());
 
+            System.out.println("Div = " + fr1.div(fr2).getStr());
 
         } catch (NumberFormatException ex) {
             System.out.println("NumberFormatException: " + ex.getMessage());

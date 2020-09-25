@@ -1,20 +1,22 @@
 package ru.sibsutis;
 
-public class Fraction {
-    private int denominator;
-    private int numerator;
+abstract public class Fraction {
+    protected int denominator;
+    protected int numerator;
 
     Fraction(int a, int b) {
+        construct(a, b);
+    }
 
-        int tmp = 1;
-        if (a != 0 && b != 0) {
-            tmp = gcd(Math.abs(a), Math.abs(b));
-        }
-        denominator = b / tmp;
-        numerator = a / tmp;
-        if (denominator < 0) {
-            numerator *= (-1);
-            denominator *= (-1);
+    Fraction(String str) {
+        String[] subStr = str.split("[/ ]");
+        try {
+            int a = Integer.parseInt(subStr[0]);
+            int b = Integer.parseInt(subStr[1]);
+
+            construct(a, b);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("Failed to create Fraction with given string " + str, e);
         }
     }
 
@@ -39,50 +41,41 @@ public class Fraction {
         return a;
     }
 
-    public int getNumerator() {
-        return numerator;
-    }
-
-    public Fraction sum(Fraction b) {
-        Fraction res = new Fraction(numerator * b.denominator + b.numerator * denominator, denominator * b.denominator);
-        return res;
-    }
-
-    public Fraction sub(Fraction b) {
-        Fraction res = new Fraction(numerator * b.denominator - b.numerator * denominator, denominator * b.denominator);
-        return res;
-    }
-
-    public Fraction mul(Fraction b) {
-        Fraction res = new Fraction(numerator * b.numerator, denominator * b.denominator);
-        return res;
-    }
-
-    public Fraction div(Fraction b) {
-        Fraction res = new Fraction(numerator * b.denominator, denominator * b.numerator);
-
-        return res;
-    }
-
-    public void print() {
-        if (denominator != 1 && numerator != 0) {
-            System.out.print(numerator + "/" + denominator + "\t");
-        } else {
-            System.out.print(numerator + "\t");
+    private void construct(int a, int b) {
+        int tmp = 1;
+        if (a != 0 && b != 0) {
+            tmp = gcd(Math.abs(a), Math.abs(b));
         }
-
-    }
-
-    public int compare(Fraction b) {
-        if (denominator * b.numerator < numerator * b.denominator) {
-            return 1;
-        } else if (denominator * b.numerator == numerator * b.denominator) {
-            return 0;
+        denominator = b / tmp;
+        numerator = a / tmp;
+        if (denominator < 0) {
+            numerator *= (-1);
+            denominator *= (-1);
         }
-        return -1;
     }
 
-    public Fraction absolute() {
-        return new Fraction(Math.abs(numerator), Math.abs(denominator));
-    }
+    abstract public Fraction copy();
+
+    abstract public Fraction square();
+
+    abstract public Fraction reverse();
+
+    abstract public Fraction minus();
+
+    abstract public int getNumerator();
+
+    abstract public int getDenominator();
+
+    abstract public String getStr();
+
+    abstract public Fraction sum(Fraction b);
+
+    abstract public Fraction sub(Fraction b);
+
+    abstract public Fraction mul(Fraction b);
+
+    abstract public Fraction div(Fraction b);
+
+    abstract public int compare(Fraction b);
+
 }
